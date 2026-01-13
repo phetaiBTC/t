@@ -14,6 +14,16 @@ export function imageToBase64(filePath?: string): string | null {
   return `data:image/${ext};base64,${file.toString('base64')}`;
 }
 
+function loadFontBase64(): string {
+  const fontPath = path.join(
+    process.cwd(),
+    'src/assets/fonts/NotoSansLao-Regular.ttf',
+  );
+
+  const fontBuffer = fs.readFileSync(fontPath);
+  return fontBuffer.toString('base64');
+}
+
 @Injectable()
 export class AppService {
   parse(buffer: Buffer): any[] {
@@ -76,15 +86,16 @@ export class AppService {
       process.cwd(),
       'src/assets/fonts/NotoSansLao-Regular.ttf',
     );
+    const fontBase64 = loadFontBase64();
+
     const htmlTemplate = fs.readFileSync(templatePath, 'utf8');
     const template = Handlebars.compile(htmlTemplate);
-    const html = template({ students });
-    const htmlWithFont = html.replace(
-      'file:///app/fonts/NotoSansLao-Regular.ttf',
-      `file://${fontPath}`,
-    );
+    const html = template({
+      students,
+      FONT_BASE64: fontBase64,
+    });
 
-    // 4. html → pdf
-    return this.generatePdf(htmlWithFont);
+    // 5. html → pdf
+    return this.generatePdf(html);
   }
 }

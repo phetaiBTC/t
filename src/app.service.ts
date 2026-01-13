@@ -53,18 +53,18 @@ export class AppService {
 
     // 2. map data
     const students = rows.map((s) => ({
-      studentId: s['ລະຫັດນັກສຶກສາ'],
-      fullName: s['ຊື່ ແລະ ນາມສະກຸນ'],
-      classRoom: s['ຫ້ອງທີ່ຮຽນ'],
-      birthDate: `${s['ວັນທີ']}/${s['ເດືອນ']}/${s['ປີ']}`,
-      village: s['ບ້ານເກີດ'],
-      district: s['ເມືອງ'],
-      province: s['ແຂວງ'],
+      studentId: s['student_id'],
+      fullName: s['full_name'],
+      classRoom: s['class'],
+      birthDate: `${s['date']}/${s['month']}/${s['year']}`,
+      village: s['village'],
+      district: s['district'],
+      province: s['province'],
       email: s['Email'],
       facebook: s['Facebook'],
-      motto: s['ຄະຕິເຕືອນໃຈ'],
-      dream: s['ຄວາມມຸ້ງຫວັງໃນອະນາຄົດ'],
-      photo: imageToBase64(s['ຮູບພາບ']),
+      motto: s['cautionary_tale'],
+      dream: s['Hope_for_the_future'],
+      photo: imageToBase64(s['image']),
     }));
 
     // 3. render html

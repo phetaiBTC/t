@@ -1,11 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lo">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+
+    body {
+      font-family: "Noto Sans Lao", sans-serif;
+      font-size: 14px;
+    }
+
+    .page {
+      page-break-after: always;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .photo {
+      width: 120px;
+      height: 160px;
+      border: 1px solid #000;
+      object-fit: cover;
+    }
+
+    .row {
+      display: flex;
+      margin-bottom: 6px;
+    }
+
+    .label {
+      width: 180px;
+      font-weight: bold;
+    }
+
+    .box {
+      border: 1px solid #000;
+      padding: 8px;
+      min-height: 60px;
+    }
+  </style>
 </head>
 <body>
-    
+
+{{#each students}}
+<div class="page">
+
+  <div class="header">
+    <h2>ແບບຟອມຂໍ້ມູນນັກສຶກສາ</h2>
+  </div>
+
+  <div style="display:flex; gap:20px">
+    <div>
+      {{#if photo}}
+        <img class="photo" src="{{photo}}" />
+      {{else}}
+        <div class="photo"></div>
+      {{/if}}
+    </div>
+
+    <div style="flex:1">
+      <div class="row">
+        <div class="label">ລະຫັດນັກສຶກສາ</div>
+        <div>{{studentId}}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">ຊື່ ແລະ ນາມສະກຸນ</div>
+        <div>{{fullName}}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">ຫ້ອງທີ່ຮຽນ</div>
+        <div>{{classRoom}}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">ວັນເກີດ</div>
+        <div>{{birthDate}}</div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="label">ທີ່ຢູ່</div>
+    <div>{{village}}, {{district}}, {{province}}</div>
+  </div>
+
+  <div class="row">
+    <div class="label">Email</div>
+    <div>{{email}}</div>
+  </div>
+
+  <div class="row">
+    <div class="label">Facebook</div>
+    <div>{{facebook}}</div>
+  </div>
+
+  <br />
+
+  <div class="label">ຄະຕິເຕືອນໃຈ</div>
+  <div class="box">{{motto}}</div>
+
+  <br />
+
+  <div class="label">ຄວາມຝັນໃນອະນາຄົດ</div>
+  <div class="box">{{dream}}</div>
+
+</div>
+{{/each}}
+
 </body>
 </html>

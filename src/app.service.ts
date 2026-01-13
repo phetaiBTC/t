@@ -17,7 +17,7 @@ export function imageToBase64(filePath?: string): string | null {
 function loadFontBase64(): string {
   const fontPath = path.join(
     process.cwd(),
-    'src/assets/fonts/NotoSansLao-Regular.ttf',
+    'src/assets/fonts/NotoSansLao-VariableFont_wdth,wght.ttf',
   );
 
   const fontBuffer = fs.readFileSync(fontPath);

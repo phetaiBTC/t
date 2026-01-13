@@ -72,12 +72,19 @@ export class AppService {
       process.cwd(),
       'src/templates/student-profile.html',
     );
-
+    const fontPath = path.join(
+      process.cwd(),
+      'src/assets/fonts/NotoSansLao-Regular.ttf',
+    );
     const htmlTemplate = fs.readFileSync(templatePath, 'utf8');
     const template = Handlebars.compile(htmlTemplate);
     const html = template({ students });
+    const htmlWithFont = html.replace(
+      'file:///app/fonts/NotoSansLao-Regular.ttf',
+      `file://${fontPath}`,
+    );
 
     // 4. html → pdf
-    return this.generatePdf(html);
+    return this.generatePdf(htmlWithFont);
   }
 }

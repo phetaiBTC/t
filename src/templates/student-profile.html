@@ -63,8 +63,7 @@
         <div>
           {{#if photo}}
           <img class="photo" src="{{photo}}" />
-          {{photo}}
-          {{else}}
+          {{photo}} {{else}}
           <div class="photo"></div>
           {{/if}}
         </div>
@@ -73,6 +72,8 @@
           <div class="row">
             <div class="label">ລະຫັດນັກສຶກສາ</div>
             <div>{{studentId}}</div>
+
+            <div>{{photo}}</div>
           </div>
 
           <div class="row">

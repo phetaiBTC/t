@@ -74,7 +74,8 @@ export class AppService {
       facebook: s['Facebook'],
       motto: s['cautionary_tale'],
       dream: s['Hope_for_the_future'],
-      photo: imageToBase64(s['image']),
+      // photo: imageToBase64(s['image']),
+      photo: s['image'],
     }));
 
     // 3. render html

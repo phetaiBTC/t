@@ -5,13 +5,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as Handlebars from 'handlebars';
 
-export function imageToBase64(filePath?: string): string | null {
+export function imageTo(filePath?: string): string | null {
   if (!filePath) return null;
-  if (!fs.existsSync(filePath)) return null;
 
-  const ext = filePath.split('.').pop();
-  const file = fs.readFileSync(filePath);
-  return `data:image/${ext};base64,${file.toString('base64')}`;
+  // ตัวอย่าง link:
+  // https://drive.google.com/file/d/15l-BnYvwybfKtWCzcgEH0YOreVo8e_iS/view?usp=sharing
+
+  const match = filePath.match(/\/d\/([^/]+)/);
+  if (!match) return null;
+
+  const fileId = match[1];
+
+  return `https://drive.google.com/uc?export=view&id=${fileId}`;
 }
 
 function loadFontBase64(): string {
@@ -74,8 +79,8 @@ export class AppService {
       facebook: s['Facebook'],
       motto: s['cautionary_tale'],
       dream: s['Hope_for_the_future'],
-      // photo: imageToBase64(s['image']),
-      photo: s['image'],
+      photo: imageTo(s['image']),
+      // photo: s['image'],
     }));
 
     // 3. render html
@@ -136,30 +141,30 @@ export class AppService {
 //     return XLSX.utils.sheet_to_json(ws, { defval: null });
 //   }
 
-  // async generatePdf(html: string): Promise<Uint8Array> {
-  //   // const browser = await puppeteer.launch({
-  //   //   args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  //   // });
-  //   const browser = await puppeteer.launch({
-  //     // executablePath: '/usr/bin/chromium-browser',
-  //     args: [
-  //       '--no-sandbox',
-  //       '--disable-setuid-sandbox',
-  //       '--disable-dev-shm-usage',
-  //     ],
-  //   });
+// async generatePdf(html: string): Promise<Uint8Array> {
+//   // const browser = await puppeteer.launch({
+//   //   args: ['--no-sandbox', '--disable-setuid-sandbox'],
+//   // });
+//   const browser = await puppeteer.launch({
+//     // executablePath: '/usr/bin/chromium-browser',
+//     args: [
+//       '--no-sandbox',
+//       '--disable-setuid-sandbox',
+//       '--disable-dev-shm-usage',
+//     ],
+//   });
 
-  //   const page = await browser.newPage();
-  //   await page.setContent(html, { waitUntil: 'networkidle0' });
+//   const page = await browser.newPage();
+//   await page.setContent(html, { waitUntil: 'networkidle0' });
 
-  //   const pdf = await page.pdf({
-  //     format: 'A4',
-  //     printBackground: true,
-  //   });
+//   const pdf = await page.pdf({
+//     format: 'A4',
+//     printBackground: true,
+//   });
 
-  //   await browser.close();
-  //   return pdf;
-  // }
+//   await browser.close();
+//   return pdf;
+// }
 
 //   async execute(file: Express.Multer.File) {
 //     // 1. parse excel

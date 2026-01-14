@@ -16,7 +16,7 @@ export function imageTo(filePath?: string): string | null {
 
   const fileId = match[1];
 
-  return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
 
 function loadFontBase64(): string {
